@@ -28,7 +28,7 @@ theme = 'PaperMod'
   ShowFullTextinRSS = true
 
 [params.homeInfoParams]
-  Title = "Hi there, I'm JeremJereJeremy Kingg 👋"
+  Title = "Hi there, I'm Jeremy King 👋"
   Content = "Welcome to my blog on the intel 4004 recreation project. **We will follow my journey to learn and implement the legendary Intel 4004 in SkyWater 130nm open source silicon!**."
 
 [[params.socialIcons]]
