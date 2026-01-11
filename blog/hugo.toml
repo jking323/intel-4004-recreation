@@ -28,7 +28,7 @@ theme = 'PaperMod'
   ShowFullTextinRSS = true
 
 [params.homeInfoParams]
-  Title = "Hi there, I'm [Name] 👋"
+  Title = "Hi there, I'm JeremJereJeremy Kingg 👋"
   Content = "Welcome to my blog on the intel 4004 recreation project. **We will follow my journey to learn and implement the legendary Intel 4004 in SkyWater 130nm open source silicon!**."
 
 [[params.socialIcons]]
@@ -51,3 +51,6 @@ theme = 'PaperMod'
 # Required for PaperMod to process CSS correctly
 [build]
   writeStats = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
