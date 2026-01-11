@@ -1,0 +1,18 @@
+baseURL = 'https://jking323.github.io/intel-4004-recreation/'
+languageCode = 'en-us'
+title = 'Intel 4004 Recreation'
+theme = 'PaperMod'
+
+[params]
+  defaultTheme = "auto" # Allows valid "light" or "dark" mode
+  # Show full content in RSS feed
+  ShowFullTextinRSS = true
+
+[minify]
+  disableXML = true
+  # specific to PaperMod, keeps things clean
+  minifyOutput = true
+
+# Required for PaperMod to process CSS correctly
+[build]
+  writeStats = true
