@@ -1,0 +1,40 @@
+# Simulation
+*.vcd
+*.vvp
+*.out
+sim/**/*.log
+
+# OpenLane
+openlane/**/*.log
+openlane/**/tmp/
+openlane/**/runs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# LaTeX
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Large files
+*.gds.gz
+
+# But DO commit
+!gds/*.gds  # Final tape-out GDS
