@@ -3,10 +3,45 @@ languageCode = 'en-us'
 title = 'Intel 4004 Recreation'
 theme = 'PaperMod'
 
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Blog"
+    url = "/posts/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"   # Requires enabling search (see below)
+    url = "/search/"
+    weight = 30
+
 [params]
   defaultTheme = "auto" # Allows valid "light" or "dark" mode
   # Show full content in RSS feed
   ShowFullTextinRSS = true
+
+[params.homeInfoParams]
+  Title = "Hi there, I'm [Name] 👋"
+  Content = "Welcome to my blog on the intel 4004 recreation project. **We will follow my journey to learn and implement the legendary Intel 4004 in SkyWater 130nm open source silicon!**."
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/jking323"
+
+[[params.socialIcons]]
+  name = "linkedin"
+  url = "https://linkedin.com/in/jeremy-king-599b21181"
+
+[[params.socialIcons]]
+  name = "email"
+  url = "mailto:jeremy@kingtechonology.net"
 
 [minify]
   disableXML = true
