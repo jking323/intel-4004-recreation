@@ -16,6 +16,7 @@ The clock is unique for the period having two phases.
 
 Below is the block diagram of the 4004 and the pin out of the DIP package!
 
-![4004 Block Diagram](docs/architecture/block-diagrams/4004-block-diagram.webp)
-![4004 Pinout](docs/architecture/block-diagrams/4004-pinout.jpg)
+![4004 Block Diagram](block-diagrams/4004-block-diagram.webp)
+![4004 Pinout](block-diagrams/4004-pinout.jpg)
+
 
