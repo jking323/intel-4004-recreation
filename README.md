@@ -5,9 +5,10 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![OpenLane](https://img.shields.io/badge/OpenLane-Enabled-green)](https://github.com/The-OpenROAD-Project/OpenLane)
 [![SkyWater PDK](https://img.shields.io/badge/PDK-SkyWater%20130nm-orange)](https://github.com/google/skywater-pdk)
+[![Blog](https://img.shields.io/badge/Blog-4004.hashnode.dev-blue)](https://4004.hashnode.dev)
 
-![4004 Die Photo](docs/historical/photos/4004-recreation-render.png)
-*Recreation of the historic Intel 4004, the world's first microprocessor*
+![4004 Die Photo](docs/historical/photos/4004-die-shot.webp)
+*Real die shot of the historic Intel 4004, the world's first microprocessor*
 
 ## 🎯 Project Goals
 
@@ -22,9 +23,11 @@ This project recreates the complete Intel MCS-4 system (4004 CPU, 4001 ROM, 4002
 
 The Intel 4004, designed by Federico Faggin in 1971, was the world's first single-chip microprocessor. It contained 2,300 transistors and enabled the microcomputer revolution.
 
-This recreation honors Faggin's pioneering work by bringing his design into the modern era of open-source silicon. I traveled to Italy to visit Olivetti (where Faggin started his career), his hometown of Vicenza, and to study the history that led to this revolutionary chip.
+This recreation honors Faggin's pioneering work by bringing his design into the modern era of open-source silicon. I am traveling to Italy to visit Olivetti (where Faggin started his career), his hometown of Vicenza, and to study the history that led to this revolutionary chip.
 
-**[Read the full journey →](docs/historical/italy-pilgrimage.md)**
+**[Read the full journey →](docs/historical/italy-trip.md)**
+
+**[Follow the development blog →](https://4004.hashnode.dev)**
 
 ## 🏗️ Architecture
 
@@ -37,12 +40,13 @@ The MCS-4 system includes:
 
 **[See architecture documentation →](docs/architecture/)**
 
-![System Block Diagram](docs/architecture/block-diagrams/mcs4-system.svg)
+![System Block Diagram](docs/architecture/block-diagrams/intel_mcs-4.svg)
 
 ## 🚀 Current Status
 
 - [x] Research and historical study
-- [x] Block-level architecture defined
+- [x] Development environment setup
+- [x] Blog and documentation framework
 - [ ] RTL design (in progress)
 - [ ] Verification
 - [ ] OpenLane hardening
@@ -50,20 +54,19 @@ The MCS-4 system includes:
 - [ ] Silicon fabrication
 - [ ] Post-silicon testing
 
-**[Track progress →]([docs/design-journal/](https://4004.hashnode.dev/welcome-here-be-the-4004-in-all-its-glory))**
+**[Track progress on the blog →](https://4004.hashnode.dev)**
+
+**[See design journal →](docs/design-journal/)**
 
 ## 🛠️ Quick Start
 
 ### Prerequisites
 ```bash
-# Docker for OpenLane
-docker pull efabless/openlane:latest
+# Install Verilog simulator and waveform viewer
+brew install icarus-verilog gtkwave
 
-# Python for testbenches
-pip3 install cocotb
-
-# Verilog simulator
-sudo apt-get install iverilog
+# Install Python testbench framework
+pip3 install cocotb pytest
 ```
 
 ### Running Simulations
@@ -83,9 +86,10 @@ gtkwave waveforms/cpu_test.vcd
 
 ## 📚 Documentation
 
+- **[Development Blog](https://4004.hashnode.dev)**: Weekly updates, design decisions, and journey
 - **[Architecture](docs/architecture/)**: Design documentation and block diagrams
 - **[Historical Context](docs/historical/)**: The 4004's history and my research journey
-- **[Design Journal](docs/design-journal/)**: Weekly progress updates
+- **[Design Journal](docs/design-journal/)**: Detailed progress updates
 - **[Verification](docs/verification/)**: Test plans and results
 - **[Datasheets](docs/datasheets/)**: Original Intel documentation
 
@@ -118,19 +122,19 @@ The original Intel 4004 design is historical (1971) and this is an educational r
 
 ## 🔗 Links
 
-- **[Project Blog](https://yourblog.com)** - Design journey and updates
+- **[Development Blog](https://4004.hashnode.dev)** - Weekly updates, design journey, and insights
 - **[Federico Faggin's Website](https://www.intel4004.com/)** - The inventor's site
 - **[Efabless Platform](https://efabless.com)** - Where this will be manufactured
 - **[Computer History Museum](https://computerhistory.org/)** - 4004 exhibits
 
 ## 📧 Contact
 
-[Jeremy King] - [jeremy@kingtechnology.net]
+Jeremy King - jeremy@jeremyking.co
 
-LinkedIn: [Your Profile]
-GitHub: [@jking323](https://github.com/jking323)
+LinkedIn: https://www.linkedin.com/in/jeremy-king-599b21181/
+
+GitHub: [@jking323](https://github.com/jkin323)
 
 ---
 
 *"The 4004 wasn't just a chip - it was the beginning of a revolution. This recreation ensures that history is never forgotten."*
-```
