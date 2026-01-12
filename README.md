@@ -50,7 +50,7 @@ The MCS-4 system includes:
 - [ ] Silicon fabrication
 - [ ] Post-silicon testing
 
-**[Track progress →](docs/design-journal/)**
+**[Track progress →]([docs/design-journal/](https://4004.hashnode.dev/welcome-here-be-the-4004-in-all-its-glory))**
 
 ## 🛠️ Quick Start
 
