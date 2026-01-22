@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Contributing to the 4004 Recreation Project
 
 Thank you for your interest in this project!
@@ -36,3 +37,34 @@ Since this project is intended for publication and academic presentation:
 * Artwork contributors will be credited in the `artwork/AUTHORS.md` file and, space permitting, on the physical silicon itself.
 
 Thank you for respecting the nature of this project and for following along with my journey!
+=======
+# Contributing
+
+Thank you for your interest! This is primarily a personal 
+historical preservation project, but contributions are welcome.
+
+## How to Contribute
+
+- Bug fixes in RTL
+- Additional test cases
+- Documentation improvements
+- Historical research
+
+## Process
+
+1. Open an issue first to discuss
+2. Fork the repository
+3. Create a feature branch
+4. Make changes
+5. Submit pull request
+
+## Code Style
+
+- Verilog: Follow standard SystemVerilog conventions
+- Python: PEP 8
+- Docs: Markdown, clear headings
+
+## Questions?
+
+Open an issue
+>>>>>>> e33886d0120b4892c7f532c9047b6e152be78469
