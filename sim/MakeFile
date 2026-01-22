@@ -1,0 +1,64 @@
+# Makefile for 4004 Recreation Project
+# Supports: Faithful, Pipelined, and RISC-4 Cores
+
+# Defaults
+SIM ?= icarus
+TOPLEVEL_LANG ?= verilog
+WAVES ?= 1
+
+# Directory Structure
+RTL_DIR = $(PWD)/../rtl
+TBS_DIR = $(PWD)/tests
+
+# ------------------------------------------------------------------------------
+# Core Selection Wrappers
+# ------------------------------------------------------------------------------
+
+.PHONY: all help test_faithful test_pipelined test_risc4 clean
+
+help:
+	@echo "4004 Verification System"
+	@echo "------------------------"
+	@echo "make test_faithful   : Run cycle-accurate 4004 tests"
+	@echo "make test_pipelined  : Run pipelined 4004 tests"
+	@echo "make test_risc4      : Run RISC-4 custom ISA tests"
+	@echo "make view            : Open the last waveform in GTKWave"
+	@echo "make clean           : Remove build artifacts"
+
+# ------------------------------------------------------------------------------
+# Test Targets
+# ------------------------------------------------------------------------------
+
+# Core A: Faithful 4004 (Transistor/Cycle Accurate)
+test_faithful:
+	$(MAKE) -f $(PWD)/Makefile.inc \
+		MODULE=test_faithful_cpu \
+		TOPLEVEL=intel_4004_core \
+		VERILOG_SOURCES="$(RTL_DIR)/faithful/*.v" \
+		SIM_BUILD=build/faithful
+
+# Core B: Pipelined 4004 (High Performance)
+test_pipelined:
+	$(MAKE) -f $(PWD)/Makefile.inc \
+		MODULE=test_pipelined_cpu \
+		TOPLEVEL=pipelined_4004_core \
+		VERILOG_SOURCES="$(RTL_DIR)/pipelined/*.v" \
+		SIM_BUILD=build/pipelined
+
+# Core C: RISC-4 (Custom ISA)
+test_risc4:
+	$(MAKE) -f $(PWD)/Makefile.inc \
+		MODULE=test_risc4_cpu \
+		TOPLEVEL=risc4_core \
+		VERILOG_SOURCES="$(RTL_DIR)/risc-4/*.v" \
+		SIM_BUILD=build/risc4
+
+# ------------------------------------------------------------------------------
+# Utilities
+# ------------------------------------------------------------------------------
+
+view:
+	gtkwave build/*/dump.vcd &
+
+clean:
+	rm -rf build __pycache__ results.xml
