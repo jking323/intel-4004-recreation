@@ -2,5 +2,4 @@
 	path = blog/themes/PaperMod
 	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "risc-4"]
-	path = risc-4
-	url = https://github.com/jking323/risc-4.git
+
