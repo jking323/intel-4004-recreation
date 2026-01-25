@@ -1,0 +1,45 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+rm -f results.xml
+COCOTB_TEST_MODULES=alutest COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=alu TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:240  in gpi_load_users                  Loaded entry library: '/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/Python'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:232  in gpi_load_users                  Running entry func 'initialize' from loaded library '/Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb/simulator.cpython-314-darwin.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:115  in initialize                      Using Python 3.14.2 interpreter at /Users/jeremy/.local/pipx/venvs/cocotb/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1769377569
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0.dev0+522b05ca from /Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running alutest.test_add_basic (1/6)
+                                                            Test basic ADD operations
+     3.00ns INFO     cocotb.regression                  alutest.test_add_basic passed
+     3.00ns INFO     cocotb.regression                  running alutest.test_sub_basic (2/6)
+                                                            Test basic SUB operations
+     6.00ns INFO     cocotb.regression                  alutest.test_sub_basic passed
+     6.00ns INFO     cocotb.regression                  running alutest.test_logical_ops (3/6)
+                                                            Test AND, OR, XOR operations
+     9.00ns INFO     cocotb.regression                  alutest.test_logical_ops passed
+     9.00ns INFO     cocotb.regression                  running alutest.test_slt_signed_comparison (4/6)
+                                                            Test SLT (Set Less Than) - Signed comparison
+    15.00ns INFO     cocotb.regression                  alutest.test_slt_signed_comparison passed
+    15.00ns INFO     cocotb.regression                  running alutest.test_adc_with_carry (5/6)
+                                                            Test ADC (Add with Carry)
+    16.00ns INFO     cocotb.regression                  alutest.test_adc_with_carry passed
+    16.00ns INFO     cocotb.regression                  running alutest.test_sbb_with_borrow (6/6)
+                                                            Test SBB (Subtract with Borrow)
+    17.00ns INFO     cocotb.regression                  alutest.test_sbb_with_borrow passed
+    17.00ns INFO     cocotb.regression                  ********************************************************************************************
+                                                        ** TEST                                STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ********************************************************************************************
+                                                        ** alutest.test_add_basic               PASS           3.00           0.00       1913.17  **
+                                                        ** alutest.test_sub_basic               PASS           3.00           0.00      34192.70  **
+                                                        ** alutest.test_logical_ops             PASS           3.00           0.00      36578.23  **
+                                                        ** alutest.test_slt_signed_comparison   PASS           6.00           0.00      53658.47  **
+                                                        ** alutest.test_adc_with_carry          PASS           1.00           0.00      31536.12  **
+                                                        ** alutest.test_sbb_with_borrow         PASS           1.00           0.00      41943.04  **
+                                                        ********************************************************************************************
+                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                       17.00           0.00       4855.95  **
+                                                        ********************************************************************************************
+FST info: dumpfile sim_build/alu.fst opened for output.

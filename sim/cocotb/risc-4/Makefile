@@ -2,26 +2,30 @@
 # RISC-4 Cocotb Testbench Makefile
 # ============================================================
 
-# Simulator selection (icarus = Icarus Verilog, free & fast)
+# Global Defaults
 SIM ?= icarus
-
-# RTL source files (adjust path to your regfile.sv)
-VERILOG_SOURCES = $(PWD)/../../../rtl/risc-4/regfile.sv
-
-# Python testbench module (no .py extension)
-MODULE = regtest
-
-# Top-level HDL module name (must match module name in regfile.sv)
-TOPLEVEL = regfile
-
-# Language
-TOPLEVEL_LANG = verilog
-
-# Waveform generation
+TOPLEVEL_LANG ?= verilog
 WAVES = 1
+
+# Default test to run if not specified (e.g. "make")
+TEST ?= alutest
+
+# Logic to switch between ALU and REGFILE
+ifeq ($(TEST),alu)
+    # --- ALU Configuration ---
+    VERILOG_SOURCES = $(PWD)/../../../rtl/risc-4/alu.sv
+    TOPLEVEL = alu
+    MODULE = alutest
+else
+    # --- Regfile Configuration (Default) ---
+    VERILOG_SOURCES = $(PWD)/../../../rtl/risc-4/regfile.sv
+    TOPLEVEL = regfile
+    MODULE = regtest
+endif
 
 # Include cocotb's simulation rules
 include $(shell cocotb-config --makefiles)/Makefile.sim
+
 
 # ============================================================
 # Convenience targets
