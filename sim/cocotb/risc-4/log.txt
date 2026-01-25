@@ -1,0 +1,72 @@
+rm -f results.xml
+"/Library/Developer/CommandLineTools/usr/bin/make" -f Makefile results.xml
+rm -f results.xml
+COCOTB_TEST_MODULES=regtest COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=regfile TOPLEVEL_LANG=verilog \
+         /opt/homebrew/bin/vvp -M /Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:240  in gpi_load_users                  Loaded entry library: '/opt/homebrew/Cellar/python@3.14/3.14.2_1/Frameworks/Python.framework/Versions/3.14/Python'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:232  in gpi_load_users                  Running entry func 'initialize' from loaded library '/Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb/simulator.cpython-314-darwin.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:115  in initialize                      Using Python 3.14.2 interpreter at /Users/jeremy/.local/pipx/venvs/cocotb/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1769317091
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0.dev0+522b05ca from /Users/jeremy/.local/pipx/venvs/cocotb/lib/python3.14/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running regtest.test_r0_always_zero (1/6)
+                                                            r0 must always read as zero (ISA requirement)
+    35.00ns INFO     cocotb.regfile                     ✓ r0 hardwired to zero
+    35.00ns INFO     cocotb.regression                  regtest.test_r0_always_zero passed
+    35.00ns INFO     cocotb.regression                  running regtest.test_basic_write_read (2/6)
+                                                            Test basic write and read operations
+    70.00ns INFO     cocotb.regfile                     ✓ r1 = 0x3
+    80.00ns INFO     cocotb.regfile                     ✓ r5 = 0xA
+    90.00ns INFO     cocotb.regfile                     ✓ r15 = 0xF
+    90.00ns INFO     cocotb.regression                  regtest.test_basic_write_read passed
+    90.00ns INFO     cocotb.regression                  running regtest.test_dual_port_read (3/6)
+                                                            Test simultaneous reads from both ports
+   135.00ns INFO     cocotb.regfile                     ✓ Dual-port read working
+   135.00ns INFO     cocotb.regression                  regtest.test_dual_port_read passed
+   135.00ns INFO     cocotb.regression                  running regtest.test_write_read_hazard (4/6)
+                                                            Test write-to-read timing in same cycle
+   165.00ns INFO     cocotb.regfile                     Before clock: read_data_a = 0x3 (expect 0x3)
+   175.00ns INFO     cocotb.regfile                     After clock: read_data_a = 0xA (expect 0xA)
+   180.00ns INFO     cocotb.regfile                     ✓ Write-to-read hazard timing correct
+   180.00ns INFO     cocotb.regression                  regtest.test_write_read_hazard passed
+   180.00ns INFO     cocotb.regression                  running regtest.test_reset_state (5/6)
+                                                            Verify reset behavior
+   201.00ns INFO     cocotb.regfile                     Register state after reset:
+   205.00ns INFO     cocotb.regfile                       r 0 = 0x0
+   210.00ns INFO     cocotb.regfile                       r 1 = 0x0
+   215.00ns INFO     cocotb.regfile                       r 2 = 0x0
+   220.00ns INFO     cocotb.regfile                       r 3 = 0x0
+   225.00ns INFO     cocotb.regfile                       r 4 = 0x0
+   230.00ns INFO     cocotb.regfile                       r 5 = 0x0
+   235.00ns INFO     cocotb.regfile                       r 6 = 0x0
+   240.00ns INFO     cocotb.regfile                       r 7 = 0x0
+   245.00ns INFO     cocotb.regfile                       r 8 = 0x0
+   250.00ns INFO     cocotb.regfile                       r 9 = 0x0
+   255.00ns INFO     cocotb.regfile                       r10 = 0x0
+   260.00ns INFO     cocotb.regfile                       r11 = 0x0
+   265.00ns INFO     cocotb.regfile                       r12 = 0x0
+   270.00ns INFO     cocotb.regfile                       r13 = 0x0
+   275.00ns INFO     cocotb.regfile                       r14 = 0x0
+   280.00ns INFO     cocotb.regfile                       r15 = 0x0
+   280.00ns INFO     cocotb.regfile                     ✓ All registers reset to 0
+   280.00ns INFO     cocotb.regression                  regtest.test_reset_state passed
+   280.00ns INFO     cocotb.regression                  running regtest.test_all_registers (6/6)
+                                                            Write and read all 16 registers
+   540.00ns INFO     cocotb.regfile                     ✓ All registers functional
+   540.00ns INFO     cocotb.regression                  regtest.test_all_registers passed
+   540.00ns INFO     cocotb.regression                  ****************************************************************************************
+                                                        ** TEST                            STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ****************************************************************************************
+                                                        ** regtest.test_r0_always_zero      PASS          35.00           0.00      17368.75  **
+                                                        ** regtest.test_basic_write_read    PASS          55.00           0.00     189709.47  **
+                                                        ** regtest.test_dual_port_read      PASS          45.00           0.00     229615.18  **
+                                                        ** regtest.test_write_read_hazard   PASS          45.00           0.00     211359.10  **
+                                                        ** regtest.test_reset_state         PASS         100.00           0.00     171265.99  **
+                                                        ** regtest.test_all_registers       PASS         260.00           0.00     381834.40  **
+                                                        ****************************************************************************************
+                                                        ** TESTS=6 PASS=6 FAIL=0 SKIP=0                  540.00           0.01     101217.55  **
+                                                        ****************************************************************************************
+FST info: dumpfile sim_build/regfile.fst opened for output.

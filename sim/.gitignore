@@ -1,0 +1,19 @@
+# Cocotb build artifacts
+cocotb/sim_build/
+cocotb/__pycache__/
+cocotb/*.pyc
+cocotb/results.xml
+
+# Waveform data files (huge, regenerate with 'make')
+*.vcd
+*.fst
+*.ghw
+
+# GTKWave temp files
+*.gtkw~
+
+# Keep the saved views!
+!waveforms/saved_views/*.gtkw
+
+# OS junk
+.DS_Store
