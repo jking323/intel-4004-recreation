@@ -3,3 +3,6 @@
 	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "risc-4"]
 
+[submodule "openlane"]
+	path = openlane
+	url = https://github.com/chipfoundry/caravel_user_project.git
