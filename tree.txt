@@ -1,0 +1,141 @@
+.
+├── artwork
+│   └── README.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── docs
+│   ├── architecture
+│   │   ├── 4001-rom.md
+│   │   ├── 4002-ram.md
+│   │   ├── 4004-architecture.md
+│   │   ├── block-diagrams
+│   │   │   ├── 4004_die_shot.webp
+│   │   │   ├── 4004-block-diagram.webp
+│   │   │   ├── 4004-pinout.jpg
+│   │   │   ├── 4004.drawio.svg
+│   │   │   ├── 800px-intel_mcs-4.svg.webp
+│   │   │   └── intel_mcs-4.svg
+│   │   ├── README.md
+│   │   └── system-integration.md
+│   ├── datasheets
+│   │   └── README.md
+│   ├── design-journal
+│   ├── fabrication
+│   │   ├── README.md
+│   │   ├── submission-checklist.md
+│   │   └── timeline.md
+│   ├── historical
+│   │   ├── faggin-tribute.md
+│   │   ├── italy-trip.md
+│   │   ├── olivetti-visit.md
+│   │   ├── original-4004.md
+│   │   ├── photos
+│   │   │   ├── 4004_die_shot.webp
+│   │   │   ├── 4004-die-shot.jpg
+│   │   │   └── 4004-die-shot.webp
+│   │   └── README.md
+│   ├── README.md
+│   ├── timeline
+│   │   ├── 4004-milestones.md
+│   │   ├── 4004-pipeline.md
+│   │   └── risc-4-milestones.md
+│   └── verification
+│       ├── README.md
+│       └── test-plan.md
+├── gds
+│   └── placeholder.md
+├── LICENSE
+├── openlane
+│   └── temp
+├── README.md
+├── references
+│   └── placeholder.md
+├── rtl
+│   ├── caravel
+│   │   └── project_wrapper.v
+│   ├── Faithful
+│   │   ├── i4001
+│   │   │   └── i4001_rom.v
+│   │   ├── i4002
+│   │   │   └── i4002_ram.v
+│   │   ├── i4003
+│   │   │   └── i4003_shift.v
+│   │   └── i4004
+│   │       ├── alu.v
+│   │       ├── control_logic.v
+│   │       ├── i4004_cpu.v
+│   │       ├── instruction_decoder.v
+│   │       ├── registers.v
+│   │       └── stack.v
+│   ├── pipelined
+│   │   ├── i4001
+│   │   │   └── i4001_rom.v
+│   │   ├── i4002
+│   │   │   └── i4002_ram.v
+│   │   ├── i4003
+│   │   │   └── i4003_shift.v
+│   │   └── i4004
+│   │       ├── alu.v
+│   │       ├── control_logic.v
+│   │       ├── i4004_cpu.v
+│   │       ├── instruction_decoder.v
+│   │       ├── registers.v
+│   │       └── stack.v
+│   ├── README.md
+│   ├── risc-4
+│   │   ├── alu.sv
+│   │   └── regfile.sv
+│   └── system
+│       ├── bus_controller.v
+│       ├── clock_gne.v
+│       └── mcs_system.v
+├── scripts
+│   └── placeholder.md
+├── signoff
+│   └── placeholder.md
+├── sim
+│   ├── cocotb
+│   │   ├── risc-4
+│   │   │   ├── __pycache__
+│   │   │   │   └── alutest.cpython-314.pyc
+│   │   │   ├── alu.txt
+│   │   │   ├── alutest.py
+│   │   │   ├── log.txt
+│   │   │   ├── Makefile
+│   │   │   ├── regtest.py
+│   │   │   ├── results.xml
+│   │   │   └── sim_build
+│   │   │       ├── alu.fst
+│   │   │       ├── cmds.f
+│   │   │       ├── cocotb_iverilog_dump.v
+│   │   │       └── sim.vvp
+│   │   ├── test_4004.py
+│   │   └── test_system.py
+│   ├── MakeFile
+│   ├── MakeFile.inc
+│   ├── QUICKREF.md
+│   ├── README.md
+│   ├── testbenches
+│   │   ├── tb_4004_cpu.v
+│   │   ├── tb_instructions.v
+│   │   └── tb_system.v
+│   └── waveforms
+│       ├── README.md
+│       ├── saved-views
+│       │   └── Regfile-test-pattern.vcd
+│       └── screenshots
+│           ├── risc-4_ALU.png
+│           └── risc-4_Register Test Pattern.png
+├── sw
+│   ├── assembler
+│   │   └── asm4004.py
+│   ├── examples
+│   │   └── blinker.asm
+│   ├── README.md
+│   └── rom-images
+│       └── temp.bin
+├── tree.txt
+├── VERSION.txt
+└── VERSIONING.md
+
+44 directories, 95 files
