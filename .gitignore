@@ -5,9 +5,9 @@
 sim/**/*.log
 
 # OpenLane
-openlane/**/*.log
 openlane/**/tmp/
 openlane/**/runs/
+openlane/dependencies/
 
 # Python
 __pycache__/
@@ -17,7 +17,6 @@ __pycache__/
 # LaTeX
 *.aux
 *.log
-*.out
 *.synctex.gz
 *.fdb_latexmk
 *.fls
@@ -34,7 +33,9 @@ Thumbs.db
 .idea/
 
 # Large files
+*.gds
 *.gds.gz
+*.mag
 
-# But DO commit
-!gds/*.gds  # Final tape-out GDS
+# But DO commit final tape-out GDS
+!gds/*.gds

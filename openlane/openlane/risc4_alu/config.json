@@ -1,0 +1,9 @@
+{
+    "DESIGN_NAME": "alu",
+    "VERILOG_FILES": "dir::../../verilog/rtl/risc-4/alu.sv",
+    "CLOCK_PERIOD": 10,
+    "CLOCK_PORT": "clk",
+    "DIE_AREA": "0 0 200 200",
+    "FP_SIZING": "absolute",
+    "FP_PDN_AUTO_ADJUST": true
+}

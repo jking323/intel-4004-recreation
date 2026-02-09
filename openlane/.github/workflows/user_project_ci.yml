@@ -1,0 +1,236 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hardening:
+    timeout-minutes: 720
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pdk: ["sky130A", "sky130B"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Install ChipFoundry CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip python3-venv python3-tk
+          pip3 install chipfoundry-cli
+
+      - name: Initialize Project
+        run: |
+          mkdir -p .cf
+          python3 <<EOF
+          import json
+          import os
+          from pathlib import Path
+          
+          project_name = os.path.basename(os.getcwd())
+          project_json = Path('.cf/project.json')
+          
+          data = {
+              "project": {
+                  "name": project_name,
+                  "type": "digital",
+                  "user": "chipfoundry",
+                  "version": "1.0.0",
+                  "user_project_wrapper_hash": "",
+                  "submission_state": "Draft"
+              }
+          }
+          
+          with open(project_json, 'w') as f:
+              json.dump(data, f, indent=2)
+          EOF
+
+      - name: Setup Dependencies
+        run: |
+          cf setup --pdk ${{ matrix.pdk }} --only-openlane --only-pdk
+
+      - name: Harden Designs
+        run: |
+          set -e
+          python3 .github/scripts/get_designs.py --design ${{ github.workspace }}
+          for design in $(cat harden_sequence.txt); do
+            cf harden $design || exit 1
+          done
+
+      - name: Upload Hardened Design
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-${{ matrix.pdk }}
+          path: |
+            ${{ github.workspace }}/gds
+            ${{ github.workspace }}/signoff
+            ${{ github.workspace }}/.cf/project.json
+          retention-days: 1
+
+  rtl-verification:
+    timeout-minutes: 720
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pdk: ["sky130A", "sky130B"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Install ChipFoundry CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip python3-venv
+          pip3 install chipfoundry-cli
+
+      - name: Initialize Project
+        run: |
+          mkdir -p .cf
+          python3 <<EOF
+          import json
+          import os
+          from pathlib import Path
+          
+          project_name = os.path.basename(os.getcwd())
+          project_json = Path('.cf/project.json')
+          
+          data = {
+              "project": {
+                  "name": project_name,
+                  "type": "digital",
+                  "user": "chipfoundry",
+                  "version": "1.0.0",
+                  "user_project_wrapper_hash": "",
+                  "submission_state": "Draft"
+              }
+          }
+          
+          with open(project_json, 'w') as f:
+              json.dump(data, f, indent=2)
+          EOF
+
+      - name: Setup Dependencies
+        run: |
+          cf setup --pdk ${{ matrix.pdk }} --only-caravel --only-mcw --only-pdk --only-cocotb
+
+      - name: Configure GPIO (non-interactive)
+        run: |
+          python3 <<EOF
+          import json
+          from pathlib import Path
+          
+          project_json = Path('.cf/project.json')
+          with open(project_json) as f:
+              data = json.load(f)
+          
+          # Set default GPIO config (all as user input no pull)
+          gpio_config = {}
+          for gpio in range(5, 38):
+              gpio_config[str(gpio)] = "13'h0402"  # GPIO_MODE_USER_STD_INPUT_NOPULL
+          
+          data['project']['gpio_config'] = gpio_config
+          
+          with open(project_json, 'w') as f:
+              json.dump(data, f, indent=2)
+          EOF
+
+      - name: Run RTL Verification
+        run: |
+          cf verify --all
+
+  precheck:
+    timeout-minutes: 720
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        pdk: ["sky130A", "sky130B"]
+    needs: [hardening]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Install ChipFoundry CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          pip3 install chipfoundry-cli
+
+      - name: Initialize Project
+        run: |
+          mkdir -p .cf
+          python3 <<EOF
+          import json
+          import os
+          from pathlib import Path
+          
+          project_name = os.path.basename(os.getcwd())
+          project_json = Path('.cf/project.json')
+          
+          data = {
+              "pdk": "${{ matrix.pdk }}",
+              "project": {
+                  "name": project_name,
+                  "type": "digital",
+                  "user": "chipfoundry",
+                  "version": "1.0.0",
+                  "user_project_wrapper_hash": "",
+                  "submission_state": "Draft"
+              }
+          }
+          
+          with open(project_json, 'w') as f:
+              json.dump(data, f, indent=2)
+          EOF
+
+      - name: Setup Dependencies
+        run: |
+          cf setup --pdk ${{ matrix.pdk }} --only-pdk --only-precheck
+
+      - name: Download Hardened Design
+        uses: actions/download-artifact@v4
+        with:
+          name: design-${{ matrix.pdk }}
+          path: ${{ github.workspace }}
+
+      - name: Configure GPIO (non-interactive)
+        run: |
+          python3 <<EOF
+          import json
+          from pathlib import Path
+          
+          project_json = Path('.cf/project.json')
+          with open(project_json) as f:
+              data = json.load(f)
+          
+          # Set default GPIO config (all as user input no pull)
+          gpio_config = {}
+          for gpio in range(5, 38):
+              gpio_config[str(gpio)] = "13'h0402"  # GPIO_MODE_USER_STD_INPUT_NOPULL
+          
+          data['project']['gpio_config'] = gpio_config
+          
+          with open(project_json, 'w') as f:
+              json.dump(data, f, indent=2)
+          EOF
+
+      - name: Run Precheck
+        run: |
+          cf precheck
